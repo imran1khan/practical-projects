@@ -1,0 +1,152 @@
+// atm application for bignners same as above but in this we are using passward;
+/////////////////////////////////////////////////////
+#include<iostream>
+using namespace std;
+void chequeandbalance(int* choice,double* balance,double* deposit,double* withrol)
+{
+	switch (*choice)
+	{
+	case 1:
+		cout << "your balance is = " << *balance;
+		break;
+	case 2:
+		cout << " enter the amount to deposit\n";
+		cin >> *deposit;
+		*balance = *balance + *deposit;
+		break;
+	case 3:
+		if(*balance<=0)
+		{
+			cout << "please deposite some money\n";
+		}
+		else
+		{
+			cout << "enter the amount you want to withdrol\n";
+			cin >> *withrol;
+			if (*withrol>*balance)
+			{
+				cout << "not enough money\n";
+			}
+			else
+			{
+				*balance = *balance - *withrol;
+			}
+		}
+		break;
+	case 4:
+		exit(0);
+	//default:
+	//	break;
+	}
+}
+void menu()
+{
+	cout << "\nwelcome to atm\n"
+		<< "1. balance\n"
+		<< "2. deposite\n"
+		<< "3. withrol\n"
+		<< "4. exit\n";
+}
+int main()
+{
+	int choice;
+	double balance = 0.0, deposite = 0.0, withrol = 0.0;
+	const int password = 123;
+	int p,c=0;
+	bool istrue = true;
+	system("color 0A");
+	cout << "welcome to the atm\n";
+	cout << "enter the password\n";
+	do
+	{
+		cin >> p;
+		if (password == p)
+		{
+			do
+			{
+				system("cls");
+				menu();
+				cout << "enter your choice\n";
+				cin >> choice;
+				chequeandbalance(&choice, &balance, &deposite, &withrol);
+				system("pause>0");
+			} while (istrue);
+		}
+		else
+		{
+			c++;
+			if (c == 3)
+			{
+				istrue = false;
+			}
+			else
+			{
+				cout << "enter the correct password\n";
+			}
+		}
+	} while (istrue);
+}
+///////////////////////////////
+//  atm applicaton without password
+#include<iostream>
+using namespace std;
+void menu()
+{
+	cout << "1. cheque balance\n";
+	cout << "2. withdrol money\n";
+	cout << "3. deposit money\n";
+	cout << "4. clear screen\n";
+	cout << "5. exit\n";
+}
+void chequwbalancef(int option,int* chequebalance,int* withdrolmoney,int* deposit)
+{
+	switch (option)
+	{
+	case 1:
+		cout <<"your balance is " << *chequebalance;
+		break;
+	case 2:
+		cout << "enter the amount: ";
+		cin >> *withdrolmoney;
+		if (*withdrolmoney <= *chequebalance)
+		{
+			*chequebalance = *chequebalance - *withdrolmoney;
+			cout << "now your balance is: " << *chequebalance;
+		}
+		else
+		{
+			cout << "not enough money ";
+		}
+		break;
+	case 3:
+		cout << "enter the amount: ";
+		cin >> *deposit;
+		*chequebalance += *deposit;
+		cout << "now your balance is: " << *chequebalance;
+		break;
+	case 4:
+		system("cls");
+		break;
+	case 5:
+		exit(0);
+		//default:
+		//	break;
+	}
+}
+int main()
+{
+	int option2, chequebalance2=0, withdrolmoney2, deposit2;
+	do
+	{
+		system("cls");
+		cout << "\n";
+		menu();
+		cout << "\n";
+		cout << "enter you choice: ";
+		cin >> option2;
+		//system("cls");
+		chequwbalancef(option2, &chequebalance2, &withdrolmoney2, &deposit2);
+		system("pause>0");
+	} while (option2<=5);
+	return 0;
+}
