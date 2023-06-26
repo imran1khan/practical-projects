@@ -1,0 +1,68 @@
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+void choice(string rps[], int &mychoice)
+{
+	cout << "enter your choice" << endl
+		<< "0 = " << rps[0] << endl
+		<< "1 = " << rps[1] << endl
+		<< "2 = " << rps[2] << endl;
+	cin >> mychoice;
+}
+int main()
+{
+	int mychoice,computer_choice;
+	string rps[] = {"rock","paper","seassior"};
+	int k = 1;
+	while (k>0)
+	{
+		srand(time(0));
+		computer_choice = rand() % 3;
+		bool win = true, drow = false;
+		do
+		{
+			choice(rps, mychoice);
+			if (mychoice>2 || mychoice<0)
+			{
+				system("cls");
+				cout << "wrong choice" << endl;
+			}
+		} while (mychoice > 2 || mychoice < 0);
+		////////////
+		if (mychoice == 0 && computer_choice == 2)
+		{
+			cout << "you won"<<endl;
+			cout << "you chose = " << rps[mychoice] << endl;
+			cout << "computer choice " << rps[computer_choice] << endl;
+			k = 0;
+		}
+		else if (mychoice == 2 && computer_choice == 1)
+		{
+			cout << "you won"<<endl;
+			cout << "you chose = " << rps[mychoice] << endl;
+			cout << "computer choice " << rps[computer_choice] << endl;
+			k = 0;
+		}
+		else if (mychoice == 1 && computer_choice == 0)
+		{
+			cout << "you won"<<endl;
+			cout << "you chose = " << rps[mychoice] << endl;
+			cout << "computer choice " << rps[computer_choice] << endl;
+			k = 0;
+		}
+		else if (mychoice == computer_choice)
+		{
+			cout << " drow continue play "<<endl;
+			cout << "you chose = " << rps[mychoice] << endl;
+			cout << "computer choice " << rps[computer_choice] << endl;
+			k = 1;
+		}
+		else
+		{
+			cout << "you lost"<<endl;
+			cout << "you chose = " << rps[mychoice]<<endl;
+			cout << "computer choice " << rps[computer_choice]<<endl;
+			k = -1;
+		}
+	}
+}
