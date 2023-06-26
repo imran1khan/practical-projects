@@ -1,0 +1,144 @@
+#include<iostream>
+#include<string>
+#include<cstdlib>
+using namespace std;
+void choice()
+{
+	cout << "if you want to play press (y) else press (n)" << endl;
+	char choice;
+	cin >> choice;
+	while ((choice != 'y' && choice != 'Y') && (choice != 'n' && choice != 'N'))
+	{
+		cout << "enter right choice\n";
+		cin >> choice;
+	}
+	if (choice=='N' || choice=='n')
+	{
+		exit(0);
+	}
+}
+void menu(string &name,int &total_deposite)
+{
+	cout << "********* welcome to the casino gessing game *********"<<endl;
+	cout << " please enter your name "<<endl;
+	getline(cin>>ws,name);
+	do
+	{
+		cout << " please enter the amount you want to deposite " << name << endl
+			<< " the minimum amount to be deposite is 5000$\n"
+			<< " and if you want to exit press (-1)\n";
+		cout << "enter anount\n";
+		cin >> total_deposite;
+		if (total_deposite<0)
+		{
+			exit(0);
+		}
+		system("cls");
+	} while (total_deposite<5000);
+	cout << "**let's start playing the game "<<name<<endl;
+
+}
+void game_rule()
+{
+	cout<< "********* welcome to the casino gessing game *********" << endl;
+	cout << "1. you have to gess a number from 1 to 10\n"
+		<< "2. if you win you are going to get 10 time reword money\n"
+		<< "3. if you lose your bid amount is going to get cut from you deposite amount\n"
+		<< "4. you have to place minimum of 1000% in the bid place\n"
+		<< "**********************************************************\n";
+	choice();
+}
+void play_game(int &bid_amount,int &total_deposit,string name)
+{
+	int my_num = 0, c_num = 0;
+	char choice1;
+	do
+	{
+		do
+		{
+			cout << "enter bid amount " << name << endl
+				<< "minimum 1000 & is required\n";
+			cout << " enter anount\n";
+			cin >> bid_amount;
+		} while (bid_amount < 1000);
+
+		srand(time(0));
+		c_num = rand() % 10 + 1;
+
+		do
+		{
+			system("cls");
+			cout << "enter a number from 1 to 10\n";
+			cin >> my_num;
+		} while (my_num < 1 || my_num>10);
+		if (my_num == c_num)
+		{
+			cout <<name<< " you won\n";
+			cout << "your number = " << my_num << endl;
+			cout << " computer's number = " << c_num << endl;
+			total_deposit = total_deposit + (bid_amount * 10);
+			cout << "your amount that you won = " << bid_amount * 10 << endl;
+			cout << "your total amount is = " << total_deposit << endl;
+		}
+		else
+		{
+			cout <<name<<" you lost\n";
+			cout << "your number = " << my_num << endl;
+			cout << " computer's number = " << c_num << endl;
+			total_deposit = total_deposit - bid_amount;
+			cout << "your amount that you lost = " << bid_amount << endl;
+			cout << "your total amount is = " << total_deposit << endl;
+		}
+		if (total_deposit < 1000)
+		{
+			cout << "your total deposit is " << total_deposit << " too low \n"
+				<< "please came back later\n";
+			choice1 = 'n';
+		}
+		else
+		{
+			cout << "do you continuoue want to play press(y) or press (n) to exit\n";
+			cin >> choice1;
+		}
+		while ((choice1!='n' && choice1!='N') && (choice1 != 'y' && choice1 != 'Y'))
+		{
+			cout << "please enter right choice\n";
+			cin >> choice1;
+		}
+	} while (choice1!='n' && choice1!='N');
+}
+int main()
+{
+	string name;
+	int k = 1;
+	while (k)
+	{
+		int total_deposite;
+		int bid_amount;
+		game_rule();
+		system("cls");
+		menu(name, total_deposite);
+		play_game(bid_amount, total_deposite, name);
+		if (total_deposite==0)
+		{
+			cout << "if you want to play again press (y) else (n)\n";
+			char cho;
+			cin >> cho;
+			while ((cho != 'Y' && cho != 'y') && (cho != 'n' && cho != 'N'))
+			{
+				cout << "wrong choice\n"
+					<< " choose again\n";
+				cin >> cho;
+			}
+			if (cho=='n' || cho=='N')
+			{
+				k = 0;
+			}
+		}
+		else
+		{
+			k = 0;
+		}
+	}
+	cout << " hope you have a nice day "<<name<<endl;
+}
